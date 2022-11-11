@@ -1,0 +1,10 @@
+mention-message: "@staff"
+sound:
+  name: "BLOCK_NOTE_BLOCK_PLING"
+  pitch: 1
+title:
+  title: "&c&lHEY!"
+  subtitle: "&6%player_name% &7te mencionó en el chat"
+  fadeIn: 10
+  stay: 70
+  fadeOut: 20
