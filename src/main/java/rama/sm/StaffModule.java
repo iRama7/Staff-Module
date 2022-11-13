@@ -62,7 +62,6 @@ public final class StaffModule extends JavaPlugin {
         dataFile = new File(getDataFolder(), "data.yml");
         if (!dataFile.exists()) {
             dataFile.getParentFile().mkdirs();
-
             saveResource("data.yml", false);
         }
 

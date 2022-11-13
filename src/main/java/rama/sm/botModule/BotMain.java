@@ -39,7 +39,6 @@ public class BotMain {
 
         if(!discord_integration){
             return;
-
         }
 
         eb.setTitle(title);
