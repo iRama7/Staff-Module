@@ -1,24 +1,20 @@
 package rama.sm.botModule;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.bukkit.plugin.Plugin;
 import rama.sm.StaffModule;
 
-import javax.security.auth.login.LoginException;
+
+import static rama.sm.StaffModule.jda;
 
 public class BotMain {
 
     private Plugin plugin = StaffModule.getPlugin(StaffModule.class);
-    String token = plugin.getConfig().getString("discord-integration.token");
-    public JDA jda = JDABuilder.createDefault(token, GatewayIntent.GUILD_MESSAGES).build().awaitReady();
 
-    public BotMain() throws LoginException, InterruptedException {
+
+    public BotMain(){
     }
 
     public void sendBotMessage(String player_name, String help_message){
