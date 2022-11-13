@@ -21,7 +21,7 @@ discord-integration:
     title: "YOUR SERVER"
     description: "Hey! %player_name% needs help and no one is online."
     help-message-field:
-      name: "Message"
+      name: "Help message"
       content: "%help-message%"
       inline: true
   notify-role: true

@@ -31,6 +31,7 @@ public final class StaffModule extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PlaceholderExpansion().register();
         }
+
     }
 
     @Override

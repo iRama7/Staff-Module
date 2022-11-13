@@ -54,5 +54,6 @@ public class MentionEvent implements Listener {
             staff.playSound(staff.getLocation(), sound, 100F, pitch);
             staff.sendTitle(title.replaceAll("%staff_name%", staff.getName()), subtitle, fadeIn, stay, fadeOut);
         }
+
     }
 }

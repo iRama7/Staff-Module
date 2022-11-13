@@ -56,5 +56,4 @@ public class BotMain {
             textChannel.sendMessage(role.getAsMention()).queue();
         }
     }
-
 }

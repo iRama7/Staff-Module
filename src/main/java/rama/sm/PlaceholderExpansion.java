@@ -33,5 +33,4 @@ public class PlaceholderExpansion extends me.clip.placeholderapi.expansion.Place
 
         return null;
     }
-
 }

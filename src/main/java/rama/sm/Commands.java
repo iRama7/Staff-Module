@@ -50,7 +50,6 @@ public class Commands implements CommandExecutor {
             }else if(args[0].equals("reload")){
                 plugin.reloadConfig();
             }
-
         }
         return false;
     }
