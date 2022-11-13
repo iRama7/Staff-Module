@@ -14,11 +14,11 @@ public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender.hasPermission("staff.adder")) {
-            if (args.length == 0 || args.length == 1) {
+            if (args.length == 0) {
                 sender.sendMessage("Utiliza /staff add <nick>");
                 return false;
             }
-            List<String> staff_list = plugin.online_staff_list_names();
+            List<String> staff_list = plugin.staff_list_names();
             if(args[0].equals("add")) {
                 String player_name = args[1];
                 if (!staff_list.contains(player_name)) {

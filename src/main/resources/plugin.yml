@@ -4,5 +4,6 @@ main: rama.sm.StaffModule
 api-version: 1.19
 authors: [ ImRama ]
 description: Staff module for Minecraft servers.
+softdepend: [PlaceholderAPI]
 commands:
   staff:

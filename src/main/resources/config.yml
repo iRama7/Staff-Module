@@ -1,10 +1,29 @@
 mention-message: "@staff"
+no-staff-message: "&cHEY! It seems that there is no staff online right now, did you check &e/help&c?" # #FFFFFF for hex color codes.
+no-help-message: "The user didn't provided a description."
+message: "&eYou've sent a notification to %staff_count% staff online."
 sound:
   name: "BLOCK_NOTE_BLOCK_PLING"
   pitch: 1
 title:
   title: "&c&lHEY!"
-  subtitle: "&6%player_name% &7te mencionó en el chat"
+  subtitle: "&6%player_name% &7needs help!"
   fadeIn: 10
   stay: 70
   fadeOut: 20
+discord-integration:
+  enable: false
+  token: ""
+  guild-id:
+  notification-channel-id:
+  notification-embed:
+    color: 310759 #hex color code
+    title: "YOUR SERVER"
+    description: "Hey! %player_name% needs help and no one is online."
+    help-message-field:
+      name: "Message"
+      content: "%help-message%"
+      inline: true
+  notify-role: true
+  notify-role-id:
+

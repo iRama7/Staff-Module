@@ -1,33 +1,50 @@
 package rama.sm;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import rama.sm.botModule.BotMain;
 
+import javax.security.auth.login.LoginException;
 import java.util.List;
 
+import static rama.sm.StaffModule.hex;
 import static rama.sm.StaffModule.plugin;
 
 public class MentionEvent implements Listener {
 
     @EventHandler
-    public void chatEvent(AsyncPlayerChatEvent e){
+    public void chatEvent(AsyncPlayerChatEvent e) throws LoginException, InterruptedException {
         FileConfiguration config = plugin.getConfig();
         String mention_message = config.getString("mention-message");
+        String no_help_message = config.getString("no-help-message");
         assert mention_message != null;
         if(e.getMessage().contains(mention_message)){
-            playMention(plugin.online_staff_list(), e.getPlayer().getName());
+            if(plugin.online_staff_list().isEmpty()){
+                String no_staff_message = hex(plugin.getConfig().getString("no-staff-message"));
+                e.getPlayer().sendMessage(no_staff_message);
+                BotMain bm = new BotMain();
+                String player_name = e.getPlayer().getName();
+                String message = e.getMessage();
+                String help_message = message.replaceAll(mention_message, "");
+                if(help_message.equals("")){
+                    help_message = no_help_message;
+                }
+                bm.sendBotMessage(player_name, help_message);
+            }else {
+                String message = hex(plugin.getConfig().getString("message"));
+                e.getPlayer().sendMessage(message.replaceAll("%staff_count%", String.valueOf(plugin.online_staff_list().size())));
+                playMention(plugin.online_staff_list(), e.getPlayer().getName());
+            }
         }
     }
 
     public void playMention(List<Player> staff_list, String who_pinged){
-        String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("title.title"));
-        String subtitle = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("title.subtitle").replaceAll("%player_name%", who_pinged));
+        String title = hex(plugin.getConfig().getString("title.title"));
+        String subtitle = hex(plugin.getConfig().getString("title.subtitle").replaceAll("%player_name%", who_pinged));
         int fadeIn = plugin.getConfig().getInt("title.fadeIn");
         int stay = plugin.getConfig().getInt("title.stay");
         int fadeOut = plugin.getConfig().getInt("title.fadeOut");
