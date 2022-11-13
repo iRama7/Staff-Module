@@ -2,6 +2,10 @@ mention-message: "@staff"
 no-staff-message: "&cHEY! It seems that there is no staff online right now, did you check &e/help&c?" # #FFFFFF for hex color codes.
 no-help-message: "The user didn't provided a description."
 message: "&eYou've sent a notification to %staff_count% staff online."
+added-staff: "&eYou've &asuccessfully &eadded &7%player_name% &eas staff."
+already-staff: "&7%player_name% &eis already in the staff list."
+removed-staff: "&eYou've removed &7%player_name% &efrom the staff list."
+cannot-remove: "&7%player_name% &eis not in the staff list."
 sound:
   name: "BLOCK_NOTE_BLOCK_PLING"
   pitch: 1

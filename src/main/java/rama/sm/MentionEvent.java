@@ -9,7 +9,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import rama.sm.botModule.BotMain;
 import rama.sm.botModule.StaffMsg;
 
-import javax.security.auth.login.LoginException;
 import java.util.List;
 
 import static rama.sm.StaffModule.hex;

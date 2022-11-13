@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -33,17 +35,20 @@ public final class StaffModule extends JavaPlugin {
         createDataFile();
         saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(new MentionEvent(), this);
-        Bukkit.getServer().getPluginCommand("staff").setExecutor(new Commands());
+        getCommand("staff").setExecutor(new Commands());
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            Bukkit.getConsoleSender().sendMessage(hex("&c[&3Staff Module&c] &aEnabling PaPi extension..."));
             new PlaceholderExpansion().register();
         }
         if(plugin.getConfig().getBoolean("discord-integration.enable") || plugin.getConfig().getBoolean("staff-msg.discord-integration.enable")){
+            Bukkit.getConsoleSender().sendMessage(hex("&c[&3Staff Module&c] &aEnabling Discord bot integration..."));
             try {
                 buildBot();
             } catch (LoginException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
+        logEnabled();
     }
 
     @Override
@@ -111,6 +116,12 @@ public final class StaffModule extends JavaPlugin {
     public void buildBot() throws LoginException, InterruptedException {
         jda = JDABuilder.createDefault(plugin.getConfig().getString("discord-integration.token"), GatewayIntent.GUILD_MESSAGES).disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOTE).build().awaitReady();
         jda.setAutoReconnect(true);
+    }
+
+    public void logEnabled(){
+        ConsoleCommandSender s = Bukkit.getConsoleSender();
+        s.sendMessage(hex("&c[&3Staff Module&c] &aEnabling Staff Module..."));
+        s.sendMessage(hex("&c[&3Staff Module&c] &aLoaded &c"+this.staff_list_names().size()+" staff players."));
     }
 
 }
