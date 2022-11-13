@@ -11,13 +11,30 @@ title:
   fadeIn: 10
   stay: 70
   fadeOut: 20
+staff-msg:
+  enable: true
+  prefix: "!"
+  format: "#ff5349&lSTAFF #ffd800%staff_name%: #cbbeb5%message%"
+  sound: UI_TOAST_IN
+  pitch: 1
+  discord-integration:
+    enable: false
+    token: ""
+    guild-id:
+    notification-channel-id:
+    notification-embed:
+      color: 310759
+      title: "STAFF TRANSCRIPT"
+      description: "**STAFF** %staff_name% -> %message%"
+    notify-role: true
+    notify-role-id:
 discord-integration:
   enable: false
   token: ""
   guild-id:
   notification-channel-id:
   notification-embed:
-    color: 310759 #hex color code
+    color: 310759
     title: "YOUR SERVER"
     description: "Hey! %player_name% needs help and no one is online."
     help-message-field:

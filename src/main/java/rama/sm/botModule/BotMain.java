@@ -17,7 +17,7 @@ public class BotMain {
     public BotMain(){
     }
 
-    public void sendBotMessage(String player_name, String help_message){
+    public void sendNoStaffMessage(String player_name, String help_message){
 
         //EMBED
         EmbedBuilder eb = new EmbedBuilder();
@@ -52,4 +52,37 @@ public class BotMain {
             textChannel.sendMessage(role.getAsMention()).queue();
         }
     }
+
+    public void sendTranscript(String staff_name, String message){
+
+        //EMBED
+        EmbedBuilder eb = new EmbedBuilder();
+        Boolean discord_integration = plugin.getConfig().getBoolean("staff-msg.discord-integration.enable");
+        String title = plugin.getConfig().getString("staff-msg.discord-integration.notification-embed.title");
+        String description = plugin.getConfig().getString("staff-msg.discord-integration.notification-embed.description").replaceAll("%staff_name%", staff_name).replaceAll("%message%", message);
+        Boolean notify_role = plugin.getConfig().getBoolean("staff-msg.discord-integration.notify-role");
+        int color = plugin.getConfig().getInt("staff-msg.discord-integration.notification-embed.color");
+        //EMBED
+
+        //IDS
+        String channel_id = plugin.getConfig().getString("staff-msg.discord-integration.notification-channel-id");
+        String role_id = plugin.getConfig().getString("staff-msg.discord-integration.notify-role-id");
+        String guild_id = plugin.getConfig().getString("staff-msg.discord-integration.guild-id");
+        //IDS
+
+        if(!discord_integration){
+            return;
+        }
+
+        eb.setTitle(title);
+        eb.setColor(color);
+        eb.setDescription(description);
+        TextChannel textChannel = jda.getGuildById(guild_id).getTextChannelById(channel_id);
+        textChannel.sendMessageEmbeds(eb.build()).queue();
+        if(notify_role) {
+            Role role = jda.getRoleById(role_id);
+            textChannel.sendMessage(role.getAsMention()).queue();
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import rama.sm.botModule.BotMain;
+import rama.sm.botModule.StaffMsg;
 
 import javax.security.auth.login.LoginException;
 import java.util.List;
@@ -17,7 +18,7 @@ import static rama.sm.StaffModule.plugin;
 public class MentionEvent implements Listener {
 
     @EventHandler
-    public void chatEvent(AsyncPlayerChatEvent e) throws LoginException, InterruptedException {
+    public void chatEvent(AsyncPlayerChatEvent e){
         FileConfiguration config = plugin.getConfig();
         String mention_message = config.getString("mention-message");
         String no_help_message = config.getString("no-help-message");
@@ -33,13 +34,25 @@ public class MentionEvent implements Listener {
                 if(help_message.equals("")){
                     help_message = no_help_message;
                 }
-                bm.sendBotMessage(player_name, help_message);
+                bm.sendNoStaffMessage(player_name, help_message);
             }else {
                 String message = hex(plugin.getConfig().getString("message"));
                 e.getPlayer().sendMessage(message.replaceAll("%staff_count%", String.valueOf(plugin.online_staff_list().size())));
                 playMention(plugin.online_staff_list(), e.getPlayer().getName());
             }
+            return;
         }
+        String firstChar = String.valueOf(e.getMessage().charAt(0));
+        String staffMsgChar = plugin.getConfig().getString("staff-msg.prefix");
+        if(firstChar.equals(staffMsgChar) && plugin.online_staff_list().contains(e.getPlayer())){
+            StaffMsg sm = new StaffMsg();
+            sm.sendStaffMSG(e.getMessage().replaceFirst(staffMsgChar, ""), e.getPlayer());
+            BotMain bm = new BotMain();
+            bm.sendTranscript(e.getPlayer().getName(), e.getMessage().replaceFirst(staffMsgChar, ""));
+            e.setCancelled(true);
+        }
+
+
     }
 
     public void playMention(List<Player> staff_list, String who_pinged){

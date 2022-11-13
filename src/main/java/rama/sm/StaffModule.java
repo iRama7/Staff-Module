@@ -37,7 +37,7 @@ public final class StaffModule extends JavaPlugin {
         if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PlaceholderExpansion().register();
         }
-        if(plugin.getConfig().getBoolean("discord-integration.enable")){
+        if(plugin.getConfig().getBoolean("discord-integration.enable") || plugin.getConfig().getBoolean("staff-msg.discord-integration.enable")){
             try {
                 buildBot();
             } catch (LoginException | InterruptedException e) {
